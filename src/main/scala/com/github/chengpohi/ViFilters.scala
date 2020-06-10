@@ -1,6 +1,6 @@
 package com.github.chengpohi
 
-import ammonite.repl.ReplAPI
+import ammonite.repl.api.ReplAPI
 import ammonite.terminal.Filter.partial
 import ammonite.terminal.FilterTools._
 import ammonite.terminal.LazyList.~:
@@ -75,14 +75,14 @@ object ViFilters {
     ,
     Filter.action("x") {
       case TermState(rest, b, c, _) if VISUAL_MODE =>
-        TS(rest, b patch(from = c, patch = Nil, replaced = 1), c)
+        TS(rest, b patch(from = c, other = Nil, replaced = 1), c)
       case TermState(rest, b, c, _) =>
         TS(rest, (b.take(c) :+ 'x') ++ b.drop(c), c + 1)
     }
     ,
     Filter.action("r") {
       case TermState(char ~: rest, b, c, _) if VISUAL_MODE =>
-        TS(rest, b patch(from = c, patch = Seq(char.toChar), replaced = 1), c)
+        TS(rest, b patch(from = c, other = Seq(char.toChar), replaced = 1), c)
       case TermState(rest, b, c, _) =>
         TS(rest, (b.take(c) :+ 'r') ++ b.drop(c), c + 1)
     }
@@ -125,11 +125,11 @@ object ViFilters {
           case Some(j) => Seq(j.toUpper)
           case None => Seq()
         }
-        TS(rest, b patch(from = c, patch = t, replaced = 1), c + 1)
+        TS(rest, b patch(from = c, other = t, replaced = 1), c + 1)
       case TermState(rest, b, c, _) =>
         TS(rest, (b.take(c) :+ '~') ++ b.drop(c), c + 1)
-    },
-    BasicFilters.enterFilter
+    }
+    //BasicFilters.enterFilter
   )
 
   def viNavFilter: Filter = Filter.merge(

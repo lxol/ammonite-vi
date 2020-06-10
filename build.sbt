@@ -6,12 +6,12 @@ version := "1.6.2-SNAPSHOT"
 
 publishMavenStyle := true
 
-scalaVersion := "2.12.8"
+scalaVersion := "2.13.2"
 
 libraryDependencies ++= {
   Seq(
-    "com.lihaoyi" % "ammonite-repl_2.12.8" % "1.6.7-1-a44339b",
-    "com.lihaoyi" % "ammonite-shell_2.12.8" % "1.6.7-1-a44339b"
+    "com.lihaoyi" % "ammonite-repl_2.13.2" % "2.1.4",
+    "com.lihaoyi" % "ammonite-shell_2.13.2" % "2.1.4"
   )
 }
 
